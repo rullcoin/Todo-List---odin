@@ -1,0 +1,27 @@
+body {
+}
+
+header {
+    width: 100%;
+}
+
+.container {
+    display: flex;
+}
+
+.menu-items {
+    display: flex;
+    flex-direction: column;
+}
+
+.label {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.projects {
+    cursor: pointer;
+}
