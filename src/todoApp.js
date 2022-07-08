@@ -23,18 +23,18 @@ const todoApp = (() => {
   };
 
   let deleteTask = (e) => {
-    let projectID = e.target.parentNode.getAttribute("project-id");
-    let idToDelete = e.target.parentNode.getAttribute('div-id')
+    let projectID = e.target.parentNode.parentNode.getAttribute("project-id");
+    let idToDelete = e.target.parentNode.parentNode.getAttribute('div-id')
 
-    e.target.parentNode.remove()
+    e.target.parentNode.parentNode.remove()
     //console.log(projectList[projectID].projectTodoList[idToDelete]);
     projectList[projectID].projectTodoList.splice(idToDelete, 1)
    
   };
 
   let editTask = (e) => {
-    let projectID = e.target.parentNode.getAttribute("project-id");
-    let idToUpdate = e.target.parentNode.getAttribute('div-id')
+    let projectID = e.target.parentNode.parentNode.getAttribute("project-id");
+    let idToUpdate = e.target.parentNode.parentNode.getAttribute('div-id')
 
     let currentTitle = projectList[projectID].projectTodoList[idToUpdate].title
     let currentDescription = projectList[projectID].projectTodoList[idToUpdate].description
@@ -75,6 +75,7 @@ const todoApp = (() => {
     parentDiv.append(newForm)
   }
 
+  //Creates the new projects div
   let addToDiv = () => {
     let projectDiv = document.getElementById("projects-element");
     projectDiv.textContent = "";
@@ -101,7 +102,7 @@ const todoApp = (() => {
     contentDiv.textContent = ""
     
     createForm(id)
-    newTaskButton()
+    
 
 
     //For each project todo, make div etc
@@ -124,9 +125,12 @@ const todoApp = (() => {
         addTaskButtons(childDiv)
         
     }
+    newTaskButton()
   };
 
   let addTaskButtons = (taskDiv) => {
+    let taskButtonDiv = document.createElement("div")
+    taskButtonDiv.classList = "task-buttons"
     let deleteButton = document.createElement("button");
     deleteButton.id = 'label-button'
     deleteButton.textContent = 'delete'
@@ -140,7 +144,8 @@ const todoApp = (() => {
         editButton.setAttribute('button-id', i)
     }
 
-    taskDiv.append(deleteButton, editButton)
+    taskButtonDiv.append(deleteButton, editButton)
+    taskDiv.append(taskButtonDiv)
 
     deleteButton.addEventListener("click", deleteTask)
     editButton.addEventListener('click', editTask)
@@ -153,8 +158,7 @@ const todoApp = (() => {
 
     let form = document.querySelector(".input-container-hidden")
     button.addEventListener("click", function() {
-        form.classList.remove("input-container-hidden")
-        form.classList.add("input-container")
+        form.classList = "input-container"
     })
     
     contentDiv.append(button)
