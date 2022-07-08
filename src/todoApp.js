@@ -58,6 +58,7 @@ const todoApp = (() => {
     contentDiv.textContent = ""
     
     createForm(id)
+    newTaskButton()
 
 
     //For each project todo, make div etc
@@ -96,23 +97,25 @@ const todoApp = (() => {
     deleteButton.addEventListener("click", deleteTask)
   };
 
-//   let newTaskButton = () => {
-//     let button = document.createElement("button")
-//     button.textContent = "Add task"
-//     button.addEventListener("click", function() {
-//         formDiv.classList.remove("input-container-hidden")
-//         formDiv.classList.add("input-container")
-//     })
+  let newTaskButton = () => {
+    let button = document.createElement("button")
+    button.textContent = "Add task"
+
+    let form = document.querySelector(".input-container-hidden")
+    button.addEventListener("click", function() {
+        form.classList.remove("input-container-hidden")
+        form.classList.add("input-container")
+    })
     
-//     contentDiv.append(button)
-//   };
+    contentDiv.append(button)
+  };
 
   let createForm = (id) => {
     let currentID = id
 
     let formDiv = document.createElement("div")
 
-    formDiv.classList.add("input-container")
+    formDiv.classList.add("input-container-hidden")
     let form = document.createElement("form")
     form.classList.add("form-div")
 
@@ -150,7 +153,7 @@ const todoApp = (() => {
 }
 
   return { CreateNewTodo, newProject, projectList, deleteTask, 
-    addToDiv, displayContent, createForm, addTaskButtons };
+    addToDiv, displayContent, createForm, newTaskButton };
 })();
 
 export default todoApp;
