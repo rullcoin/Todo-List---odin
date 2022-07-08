@@ -7,14 +7,16 @@ header {
 
 .container {
     display: flex;
+    height: 350px;
 }
 
 .menu-items {
     display: flex;
     flex-direction: column;
+
 }
 
-.label {
+.add-project-container {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -23,5 +25,14 @@ header {
 }
 
 .projects {
-    cursor: pointer;
+    height: 300px;
+    overflow-y: auto;
+}
+
+#project-name {
+cursor: pointer;
+}
+
+.input-container-hidden {
+    visibility: hidden;
 }

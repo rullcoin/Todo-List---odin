@@ -19,8 +19,6 @@ let projectDiv = document.querySelector('.projects-element')
 projectDiv.addEventListener('click', function(e) {
     //Render all current projects
     todoApp.displayContent(e.target.parentElement.getAttribute('data-id'))
-
-
    //When I click on the project. I get the parent element data-id and
    // Display dynamically this Projects content
 })
