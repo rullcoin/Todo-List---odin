@@ -17,9 +17,6 @@ header {
 
 }
 
-.add-project-container {
-}
-
 .projects {
     height: 300px;
     overflow-y: auto;
@@ -30,7 +27,7 @@ cursor: pointer;
 }
 
 .input-container-hidden, .edit-hidden {
-    visibility: hidden;
+    display: none;
 }
 
 .content-container {
@@ -43,4 +40,19 @@ cursor: pointer;
 
 .add-project-container {
     padding-top: 5rem;
+}
+
+.task-container {
+    border: 1px solid black;
+    padding: 5px;
+}
+
+.project-heading {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.project-label-hidden {
+    display: none;
 }
