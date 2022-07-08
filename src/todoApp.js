@@ -41,7 +41,6 @@ const todoApp = (() => {
 
     let parentDiv = document.querySelector(".task-container")
     let newForm = document.createElement("form")
-    parentDiv.textContent = ""
 
     let title = document.createElement("input")
     let description = document.createElement("input")
@@ -68,6 +67,8 @@ const todoApp = (() => {
   
         projectList[projectID].projectTodoList.splice(idToUpdate, 1, CreateNewTodo(newTitle, newDescription))
         console.log(projectList);
+
+        displayContent(projectID)
     })
 
     newForm.append(title, description, button)

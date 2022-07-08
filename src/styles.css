@@ -8,6 +8,7 @@ header {
 .container {
     display: flex;
     height: 350px;
+    width: 100%;
 }
 
 .menu-items {
@@ -17,11 +18,6 @@ header {
 }
 
 .add-project-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
 }
 
 .projects {
@@ -33,10 +29,18 @@ header {
 cursor: pointer;
 }
 
-.input-container-hidden {
+.input-container-hidden, .edit-hidden {
     visibility: hidden;
 }
 
-.edit {
-    visibility: hidden;
+.content-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.add-project-container {
+    padding-top: 5rem;
 }
