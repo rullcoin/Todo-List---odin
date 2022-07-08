@@ -32,9 +32,51 @@ const todoApp = (() => {
    
   };
 
+  let editTask = (e) => {
+    let projectID = e.target.parentNode.getAttribute("project-id");
+    let idToUpdate = e.target.parentNode.getAttribute('div-id')
+
+    let currentTitle = projectList[projectID].projectTodoList[idToUpdate].title
+    let currentDescription = projectList[projectID].projectTodoList[idToUpdate].description
+
+    let parentDiv = document.querySelector(".task-container")
+    let newForm = document.createElement("form")
+    parentDiv.textContent = ""
+
+    let title = document.createElement("input")
+    let description = document.createElement("input")
+
+    title.type = 'text'
+    title.id = "edit-title"
+    title.value = currentTitle
+
+    description.type = "text"
+    description.id = "edit-description"
+    description.value = currentDescription
+
+    let button = document.createElement("button");
+    button.type = 'submit'
+    button.id = 'edit-button'
+    button.textContent = 'Edit'
+
+    
+
+    button.addEventListener("click", function(e) {
+        e.preventDefault()
+        let newTitle = document.getElementById("edit-title").value
+        let newDescription = document.getElementById("edit-description").value
+  
+        projectList[projectID].projectTodoList.splice(idToUpdate, 1, CreateNewTodo(newTitle, newDescription))
+        console.log(projectList);
+    })
+
+    newForm.append(title, description, button)
+    parentDiv.append(newForm)
+  }
+
   let addToDiv = () => {
     let projectDiv = document.getElementById("projects-element");
-    //projectDiv.textContent = "";
+    projectDiv.textContent = "";
 
     for (let i = 0; i < projectList.length; i++) {
       let childDiv = document.createElement("div");
@@ -43,7 +85,7 @@ const todoApp = (() => {
 
       //Sets new ID for the div
       childDiv.setAttribute("data-id", i);
-      //Project name.
+      //Project name
       projectTitle.textContent = projectList[i].name;
 
       childDiv.append(projectTitle);
@@ -88,18 +130,25 @@ const todoApp = (() => {
     deleteButton.id = 'label-button'
     deleteButton.textContent = 'delete'
 
+    let editButton = document.createElement("button");
+    editButton.id = 'update-button'
+    editButton.textContent = "Edit"
+
     for (let i = 0; i < projectList.length; i++) {
         deleteButton.setAttribute('button-id', i)
+        editButton.setAttribute('button-id', i)
     }
 
-    taskDiv.append(deleteButton)
+    taskDiv.append(deleteButton, editButton)
 
     deleteButton.addEventListener("click", deleteTask)
+    editButton.addEventListener('click', editTask)
   };
 
   let newTaskButton = () => {
     let button = document.createElement("button")
     button.textContent = "Add task"
+    button.classList = "add-task-button"
 
     let form = document.querySelector(".input-container-hidden")
     button.addEventListener("click", function() {

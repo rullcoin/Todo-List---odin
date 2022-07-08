@@ -36,3 +36,7 @@ cursor: pointer;
 .input-container-hidden {
     visibility: hidden;
 }
+
+.edit {
+    visibility: hidden;
+}
