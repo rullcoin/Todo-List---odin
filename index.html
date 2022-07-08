@@ -19,7 +19,14 @@
             </div>
 
             <div id="projects" class="projects">
-                <h1>Projects</h1>
+                <div class="project-heading">
+                    <h1>Projects</h1>
+                    <div class="new-project-container">
+                        <button id="new-project-button">+</button>
+                    </div>
+                    
+                </div>
+                
                 <div id="projects-element" class="projects-element">
 
                 </div>
@@ -34,7 +41,7 @@
         </div>
         
         <div class="add-project-container">
-            <div class="label">
+            <div class="project-label-hidden">
                 <form class="add-project-form" action="" method="">
                     <label for="add-project">Add new project</label>
                 <input
@@ -46,6 +53,8 @@
                   required
                 />
                 <button id="submit-button" type="submit">+</button>
+                
+                <button id="cancel-button" type="submit">cancel</button>
             </div>
         </form>
         </div>
