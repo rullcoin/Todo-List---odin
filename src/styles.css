@@ -117,3 +117,11 @@ cursor: pointer;
     content: ' ';
     background: rgba(0,0,0,.5);
 }
+
+.important-priority {
+    color: red;
+}
+
+.low-priority {
+    color: rgb(36, 211, 30);
+}

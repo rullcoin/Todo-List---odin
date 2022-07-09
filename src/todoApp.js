@@ -38,7 +38,7 @@ const todoApp = (() => {
 
     let currentTitle = projectList[projectID].projectTodoList[idToUpdate].title
     let currentDescription = projectList[projectID].projectTodoList[idToUpdate].description
-
+    //Add date and priority as well
     let parentDiv = document.querySelector(".task-container")
     let newForm = document.createElement("form")
 
@@ -115,17 +115,28 @@ const todoApp = (() => {
 
         let TodoName = document.createElement("h1")
         let TodoDescription = document.createElement("p")
+        let TodoDate = document.createElement("p")
+        let TodoPriority = document.createElement('p')
+        
 
         TodoName.textContent = currentProject.projectTodoList[i].title
         TodoDescription.textContent = currentProject.projectTodoList[i].description
+        TodoDate.textContent = currentProject.projectTodoList[i].dueDate
+        TodoPriority.textContent = currentProject.projectTodoList[i].priority
 
-        childDiv.append(TodoName, TodoDescription)
+        if (TodoPriority.textContent === "Important") {
+            TodoPriority.classList = "important-priority"
+        } else {
+            TodoPriority.classList = "low-priority"
+        }
+
+        childDiv.append(TodoName, TodoDescription, TodoDate, TodoPriority)
         contentDiv.append(childDiv)
 
         addTaskButtons(childDiv)
         
     }
-    newTaskButton()
+    //newTaskButton()
   };
 
   let addTaskButtons = (taskDiv) => {
@@ -151,63 +162,94 @@ const todoApp = (() => {
     editButton.addEventListener('click', editTask)
   };
 
-  let newTaskButton = () => {
-    let button = document.createElement("button")
-    button.textContent = "Add task"
-    button.classList = "add-task-button"
+  //Removing for now. Not needed/better flow without it.
+//   let newTaskButton = () => {
+//     let button = document.createElement("button")
+//     button.textContent = "Add task"
+//     button.classList = "add-task-button"
 
-    let form = document.querySelector(".input-container-hidden")
-    button.addEventListener("click", function() {
-        form.classList = "input-container"
-    })
+//     let form = document.querySelector(".input-container-hidden")
+//     button.addEventListener("click", function() {
+//         form.classList = "input-container"
+//     })
     
-    contentDiv.append(button)
-  };
+//     contentDiv.append(button)
+//   };
 
   let createForm = (id) => {
     let currentID = id
 
     let formDiv = document.createElement("div")
 
-    formDiv.classList.add("input-container-hidden")
+    formDiv.classList.add("input-container")
+    //formDiv.classList.add("input-container-hidden")
     let form = document.createElement("form")
     form.classList.add("form-div")
 
     let button = document.createElement("input");
     let title = document.createElement("input")
     let description = document.createElement("input")
+    let date = document.createElement("input")
+    let priority = document.createElement("select")
 
     title.type = 'text'
     title.id = "title"
     title.placeholder = "new task title"
+    title.required = true
 
     description.type = "text"
     description.id = "description"
     description.placeholder = "Description"
+    description.required = true
 
 
     button.type = 'button'
     button.id = 'label-button'
     button.value = 'submit'
-    button.addEventListener('click', function() {
+
+    date.type = "date"
+    date.id = 'date'
+
+    priority.id = 'select'
+    let optionLow = document.createElement('option')
+    let optionImportant = document.createElement('option')
+    optionLow.text = 'Low'
+    optionImportant.text = 'Important'
+    optionImportant.classList = 'important-priority'
+    optionLow.classList = 'low-priority'
+
+    priority.append(optionLow, optionImportant)
+
+    form.append(title, description, date, priority, button)
+    formDiv.append(form)
+    contentDiv.append(formDiv)
+
+    //Cannot add "required" inputs because of this function
+    button.addEventListener('click', function(e) {
+        
         title = document.getElementById('title').value
         description = document.getElementById('description').value
+        date = document.getElementById('date').value
+        priority = document.getElementById('select').value
+
         
-        let newTask = CreateNewTodo(title, description)
+        if (title != "") {
+        let newTask = CreateNewTodo(title, description, date, priority)
         let currentProjectList = projectList[currentID].projectTodoList
 
         currentProjectList.push(newTask)
         console.log(projectList);
         displayContent(currentID)
+
+    } else {
+        alert("Make sure that you enter a title!")
+    }
     })
 
-    form.append(button, title, description)
-    formDiv.append(form)
-    contentDiv.append(formDiv)
 }
 
   return { CreateNewTodo, newProject, projectList, deleteTask, 
-    addToDiv, displayContent, createForm, newTaskButton };
+    addToDiv, displayContent, createForm };
 })();
 
 export default todoApp;

@@ -30,12 +30,15 @@ submitButton.addEventListener("click", function(e) {
     e.preventDefault()
     let title = document.getElementById("add-project").value
     let newProject = todoApp.newProject(title)
-  
+
     todoApp.projectList.push(newProject)
     console.log(todoApp.projectList)
     todoApp.addToDiv()
 
     addProjectDiv.classList = "project-label-hidden"
+    
+
+
 })
 
 
@@ -55,8 +58,7 @@ cancelProjectButton.addEventListener("click", function(e) {
 
 // let div = document.getElementById('project-label')
 
-
+console.log("s");
 
 
 // div.append(newDiv)
-
