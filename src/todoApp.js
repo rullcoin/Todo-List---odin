@@ -38,12 +38,18 @@ const todoApp = (() => {
 
     let currentTitle = projectList[projectID].projectTodoList[idToUpdate].title
     let currentDescription = projectList[projectID].projectTodoList[idToUpdate].description
+    let currentDate = projectList[projectID].projectTodoList[idToUpdate].dueDate
+    let currentPriority = projectList[projectID].projectTodoList[idToUpdate].priority
     //Add date and priority as well
-    let parentDiv = document.querySelector(".task-container")
+    
+    let parentDiv = e.target.parentNode.parentNode
+    
     let newForm = document.createElement("form")
 
     let title = document.createElement("input")
     let description = document.createElement("input")
+    let date = document.createElement("input")
+    let priority = document.createElement("select")
 
     title.type = 'text'
     title.id = "edit-title"
@@ -53,25 +59,38 @@ const todoApp = (() => {
     description.id = "edit-description"
     description.value = currentDescription
 
+    date.type = "date"
+    date.id = "edit-date"
+    date.value = currentDate
+
+    priority.id = "edit-select"
+    let optionLow = document.createElement('option')
+    let optionImportant = document.createElement('option')
+    optionLow.text = 'Low'
+    optionImportant.text = 'Important'
+    optionImportant.classList = 'important-priority'
+    optionLow.classList = 'low-priority'
+    priority.append(optionLow, optionImportant)
+
     let button = document.createElement("button");
     button.type = 'submit'
     button.id = 'edit-button'
     button.textContent = 'Edit'
 
-    
-
     button.addEventListener("click", function(e) {
         e.preventDefault()
         let newTitle = document.getElementById("edit-title").value
         let newDescription = document.getElementById("edit-description").value
+        let newDate = document.getElementById("edit-date").value
+        let newPriority = document.getElementById("edit-select").value
   
-        projectList[projectID].projectTodoList.splice(idToUpdate, 1, CreateNewTodo(newTitle, newDescription))
+        projectList[projectID].projectTodoList.splice(idToUpdate, 1, CreateNewTodo(newTitle, newDescription, newDate, newPriority))
         console.log(projectList);
 
         displayContent(projectID)
     })
 
-    newForm.append(title, description, button)
+    newForm.append(title, description, date, priority, button)
     parentDiv.append(newForm)
   }
 
