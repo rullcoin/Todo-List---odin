@@ -35,16 +35,21 @@ const todoApp = (() => {
   let editTask = (e) => {
     let projectID = e.target.parentNode.parentNode.getAttribute("project-id");
     let idToUpdate = e.target.parentNode.parentNode.getAttribute('div-id')
-
+    
     let currentTitle = projectList[projectID].projectTodoList[idToUpdate].title
     let currentDescription = projectList[projectID].projectTodoList[idToUpdate].description
     let currentDate = projectList[projectID].projectTodoList[idToUpdate].dueDate
     let currentPriority = projectList[projectID].projectTodoList[idToUpdate].priority
     //Add date and priority as well
     
-    let parentDiv = e.target.parentNode.parentNode
+    //let parentDiv = e.target.parentNode.parentNode
+    let projectDiv = document.getElementById("add-project-container")
+
     
     let newForm = document.createElement("form")
+    newForm.classList = "edit-form"
+
+    //createBlockerDiv(projectDiv)
 
     let title = document.createElement("input")
     let description = document.createElement("input")
@@ -85,13 +90,29 @@ const todoApp = (() => {
         let newPriority = document.getElementById("edit-select").value
   
         projectList[projectID].projectTodoList.splice(idToUpdate, 1, CreateNewTodo(newTitle, newDescription, newDate, newPriority))
-        console.log(projectList);
+        
 
         displayContent(projectID)
+        //Removes edit-form div on submission
+        //e.target.parentNode.parentNode.removeChild(e.target.parentNode)
+        //e.target.parentNode.parentNode.removeChild("blocker")
     })
 
     newForm.append(title, description, date, priority, button)
-    parentDiv.append(newForm)
+    //parentDiv.append(newForm)
+    projectDiv.append(newForm)
+  }
+
+  let createBlockerDiv = (div) => {
+    let blockerDiv = document.createElement("div")
+    blockerDiv.classList = "blocker"
+
+    div.append(blockerDiv)
+
+    blockerDiv.addEventListener('click', function(e) {
+        div.classList = "project-label-hidden"
+        e.target.parentNode.removeChild(e.target)
+    })
   }
 
   //Creates the new projects div
@@ -181,20 +202,6 @@ const todoApp = (() => {
     editButton.addEventListener('click', editTask)
   };
 
-  //Removing for now. Not needed/better flow without it.
-//   let newTaskButton = () => {
-//     let button = document.createElement("button")
-//     button.textContent = "Add task"
-//     button.classList = "add-task-button"
-
-//     let form = document.querySelector(".input-container-hidden")
-//     button.addEventListener("click", function() {
-//         form.classList = "input-container"
-//     })
-    
-//     contentDiv.append(button)
-//   };
-
   let createForm = (id) => {
     let currentID = id
 
@@ -268,7 +275,22 @@ const todoApp = (() => {
 }
 
   return { CreateNewTodo, newProject, projectList, deleteTask, 
-    addToDiv, displayContent, createForm };
+    addToDiv, displayContent, createForm, createBlockerDiv };
 })();
 
 export default todoApp;
+
+
+  //Removing for now. Not needed/better flow without it.
+//   let newTaskButton = () => {
+//     let button = document.createElement("button")
+//     button.textContent = "Add task"
+//     button.classList = "add-task-button"
+
+//     let form = document.querySelector(".input-container-hidden")
+//     button.addEventListener("click", function() {
+//         form.classList = "input-container"
+//     })
+    
+//     contentDiv.append(button)
+//   };
