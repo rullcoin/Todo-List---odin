@@ -2,7 +2,7 @@ const todoApp = (() => {
   //Projects are stored in this array with their todo's
   let projectList = [];
   let contentDiv = document.getElementById("content")
-  
+  let newForm = document.createElement("form")
 
   let CreateNewTodo = (title, description, dueDate, priority) => {
     return {
@@ -46,10 +46,14 @@ const todoApp = (() => {
     let projectDiv = document.getElementById("add-project-container")
 
     
-    let newForm = document.createElement("form")
+    //let newForm = document.createElement("form")
     newForm.classList = "edit-form"
+    newForm.id = "edit-form"
 
-    //createBlockerDiv(projectDiv)
+    let editingDiv = document.createElement("div")
+    editingDiv.id = "editing-div"
+
+    createBlockerDiv(editingDiv)
 
     let title = document.createElement("input")
     let description = document.createElement("input")
@@ -83,6 +87,8 @@ const todoApp = (() => {
     button.textContent = 'Edit'
 
     button.addEventListener("click", function(e) {
+        
+
         e.preventDefault()
         let newTitle = document.getElementById("edit-title").value
         let newDescription = document.getElementById("edit-description").value
@@ -94,24 +100,45 @@ const todoApp = (() => {
 
         displayContent(projectID)
         //Removes edit-form div on submission
-        //e.target.parentNode.parentNode.removeChild(e.target.parentNode)
-        //e.target.parentNode.parentNode.removeChild("blocker")
-    })
+        e.target.parentNode.parentNode.parentNode.removeChild(editingDiv)
+        newForm.textContent = ""
+    }) 
 
     newForm.append(title, description, date, priority, button)
-    //parentDiv.append(newForm)
-    projectDiv.append(newForm)
+    editingDiv.append(newForm)
+    projectDiv.append(editingDiv)
   }
 
   let createBlockerDiv = (div) => {
     let blockerDiv = document.createElement("div")
     blockerDiv.classList = "blocker"
+    blockerDiv.id = "blocker"
+
+    let editingDiv = document.getElementById("editing-div")
+    let editForm = document.getElementById("edit-form")
 
     div.append(blockerDiv)
 
     blockerDiv.addEventListener('click', function(e) {
         div.classList = "project-label-hidden"
-        e.target.parentNode.removeChild(e.target)
+        newForm.textContent = ""
+        if (e.target.parentNode.id === "editing-div") {
+            e.target.parentNode.parentNode.removeChild(e.target.parentNode)
+        } else {
+            e.target.parentNode.removeChild(blockerDiv)
+        }
+
+
+        //
+        // if (newForm.classList === "edit-form") {
+        //     console.log("lol");
+        //     //e.target.parentNode.removeChild(editForm)
+        //     //console.log(e.target.removeChild(editForm));
+        // } else {
+        //     e.target.parentNode.removeChild(editForm)
+        //    //e.target.parentNode.parentNode.removeChild(editForm)
+        //     console.log(e.target);
+        // }
     })
   }
 

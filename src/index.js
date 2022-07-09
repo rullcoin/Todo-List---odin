@@ -26,6 +26,11 @@ submitButton.addEventListener("click", function(e) {
     console.log(todoApp.projectList)
     todoApp.addToDiv()
 
+    //Needed to remove blocker div
+    let blockerDiv = document.getElementById("blocker")
+    e.target.parentNode.parentNode.removeChild(blockerDiv)
+    //console.log(e.target.parentNode.parentNode.child);
+
     addProjectDiv.classList = "project-label-hidden"
 })
 
