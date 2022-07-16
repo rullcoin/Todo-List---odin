@@ -20,15 +20,15 @@ addNewProjectButton.addEventListener('click', function() {
 submitButton.addEventListener("click", function(e) {
     e.preventDefault()
     let title = document.getElementById("add-project").value
-    let newProject = todoApp.newProject(title)
+    todoApp.newProject(title)
 
-    todoApp.projectList.push(newProject)
-    console.log(todoApp.projectList)
+    //todoApp.projectList.push(newProject)
+    //console.log(todoApp.projectList)
     todoApp.addToDiv()
 
     //Needed to remove blocker div
     let blockerDiv = document.getElementById("blocker")
-    e.target.parentNode.parentNode.removeChild(blockerDiv)
+    e.target.parentNode.parentNode.parentNode.removeChild(blockerDiv)
     //console.log(e.target.parentNode.parentNode.child);
 
     addProjectDiv.classList = "project-label-hidden"
@@ -44,3 +44,9 @@ cancelProjectButton.addEventListener("click", function(e) {
     addProjectDiv.classList = "project-label-hidden"
     projectLabel.value = ""
 })
+
+//console.log(localStorage.length);
+todoApp.displayLocalItems()
+//localStorage.clear()
+// todoApp.addToDiv()
+// console.log(todoApp.projectList);

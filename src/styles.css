@@ -1,14 +1,17 @@
 body {
     padding: 0;
     margin: 0;
+    font-family: 'Roboto', sans-serif;
 }
 
 header {
     width: 100%;
     border: 1px solid gainsboro;
     display: flex;
-    justify-content: center;
+    justify-content: start;
+    padding-left: 3rem;
     margin-bottom: 5px;
+    background-color: aliceblue;
 }
 
 .container {
@@ -20,6 +23,10 @@ header {
     display: flex;
     flex-direction: column;
     border: 1px solid black;
+
+    background-color: rgb(161, 199, 139);
+    padding-left: 3rem;
+    
 }
 
 .projects {
@@ -30,6 +37,11 @@ header {
 #project-name {
 cursor: pointer;
 }
+
+#project-name * {
+    margin: 0;
+    padding: 0;
+} 
 
 .input-container-hidden, .edit-hidden, .project-label-hidden {
     display: none;

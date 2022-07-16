@@ -15,6 +15,7 @@ const todoApp = (() => {
 
   let newProject = (name) => {
     let id = projectList.length;
+    projectList.push({name, id, projectTodoList: []})
     return {
       name,
       id,
@@ -29,7 +30,11 @@ const todoApp = (() => {
     e.target.parentNode.parentNode.remove()
     //console.log(projectList[projectID].projectTodoList[idToDelete]);
     projectList[projectID].projectTodoList.splice(idToDelete, 1)
-   
+    console.log(projectList);
+    addToDiv()
+
+    //Refresh local item list
+    localStoreItem('list', JSON.stringify(projectList))
   };
 
   let editTask = (e) => {
@@ -96,7 +101,8 @@ const todoApp = (() => {
         let newPriority = document.getElementById("edit-select").value
   
         projectList[projectID].projectTodoList.splice(idToUpdate, 1, CreateNewTodo(newTitle, newDescription, newDate, newPriority))
-        
+        // Refresh localStorage list
+        localStoreItem('list', JSON.stringify(projectList))
 
         displayContent(projectID)
         //Removes edit-form div on submission
@@ -170,8 +176,6 @@ const todoApp = (() => {
     
     createForm(id)
     
-
-
     //For each project todo, make div etc
     for (let i = 0; i < currentProject.projectTodoList.length; i++) {
         
@@ -228,6 +232,7 @@ const todoApp = (() => {
     deleteButton.addEventListener("click", deleteTask)
     editButton.addEventListener('click', editTask)
   };
+
 
   let createForm = (id) => {
     let currentID = id
@@ -291,18 +296,52 @@ const todoApp = (() => {
         let currentProjectList = projectList[currentID].projectTodoList
 
         currentProjectList.push(newTask)
-        console.log(projectList);
+
+        // Add new project and task to local storage
+
+
+        //localStorage.clear() //remove after tests
+        //localStoreItem(projectList[currentID].name, JSON.stringify(newTask))
+
+        //Retrieves item
+        //let item = retrieveLocalItem(projectList[currentID].name);
+        //console.log(retrieveLocalItem(projectList[currentID].name))
+        
+        localStoreItem('list', JSON.stringify(projectList))
+        // console.log(projectList);
+       
+        // add the result to project list on refresh
+
+        
         displayContent(currentID)
 
     } else {
         alert("Make sure that you enter a title!")
     }
     })
-
 }
 
+let localStoreItem = (key, value) => {
+    localStorage.setItem(key, JSON.stringify(value));
+}
+
+let retrieveLocalItem = (item) => {
+    let x = localStorage.getItem(item)
+    let parsedItem = JSON.parse(x)
+    return JSON.parse(parsedItem)
+}
+
+let displayLocalItems = () => {
+    if (localStorage.length === 1) {
+        projectList = retrieveLocalItem('list')
+        addToDiv()
+    }
+}
+
+
   return { CreateNewTodo, newProject, projectList, deleteTask, 
-    addToDiv, displayContent, createForm, createBlockerDiv };
+    addToDiv, displayContent, createForm, createBlockerDiv, localStoreItem, 
+    retrieveLocalItem, displayLocalItems };
 })();
 
 export default todoApp;
