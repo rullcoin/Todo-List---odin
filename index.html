@@ -4,12 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400&display=swap" rel="stylesheet">
     <title>Todo</title>
 </head>
 <body>
     <header>
         <div class="title">
-            <h1>Todo</h1>
+            <h1>To do!</h1>
         </div>
     </header>
     <div class="container">
@@ -44,7 +47,7 @@
                 <div class="project-label-hidden">
                     <!-- <div id="blocker" class="blocker"></div> -->
                     <form class="add-project-form">
-                        
+                        <h1 class="project-title-heading">Add new project</h1>
                     <input
                       type="text"
                       minlength="2"
@@ -53,8 +56,10 @@
                       placeholder="Add New Project"
                       required
                     />
-                    <button id="submit-button" type="submit">🗸</button>
-                    <button id="cancel-button" type="button">🗙</button>
+                    <div class="new-project-buttons">
+                        <button id="submit-button" type="submit">🗸</button>
+                        <button id="cancel-button" type="button">🗙</button>
+                    </div>
                 </div>
             </div>
         </form>
