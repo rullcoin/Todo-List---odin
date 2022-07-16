@@ -30,8 +30,13 @@ const todoApp = (() => {
     e.target.parentNode.parentNode.remove()
     //console.log(projectList[projectID].projectTodoList[idToDelete]);
     projectList[projectID].projectTodoList.splice(idToDelete, 1)
-    console.log(projectList);
-    addToDiv()
+    console.log(projectList[projectID].projectTodoList.length);
+
+    displayContent(projectID)
+
+    // for (let i = 0; i < projectList[id].projectTodoList.length; i++) {
+    //     childDiv.setAttribute('div-id', i)
+    // }
 
     //Refresh local item list
     localStoreItem('list', JSON.stringify(projectList))
@@ -40,11 +45,12 @@ const todoApp = (() => {
   let editTask = (e) => {
     let projectID = e.target.parentNode.parentNode.getAttribute("project-id");
     let idToUpdate = e.target.parentNode.parentNode.getAttribute('div-id')
+    let project = projectList[projectID].projectTodoList[idToUpdate]
     
-    let currentTitle = projectList[projectID].projectTodoList[idToUpdate].title
-    let currentDescription = projectList[projectID].projectTodoList[idToUpdate].description
-    let currentDate = projectList[projectID].projectTodoList[idToUpdate].dueDate
-    let currentPriority = projectList[projectID].projectTodoList[idToUpdate].priority
+    let currentTitle = project.title
+    let currentDescription = project.description
+    let currentDate = project.dueDate
+    let currentPriority = project.priority
     //Add date and priority as well
     
     //let parentDiv = e.target.parentNode.parentNode
