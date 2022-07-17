@@ -174,10 +174,25 @@ const todoApp = (() => {
         childDiv.setAttribute('div-id', i)
         childDiv.setAttribute('project-id', id)
 
+        let nameDiv = document.createElement("div")
+        nameDiv.classList = "task-content-div"
         let TodoName = document.createElement("h4")
+        nameDiv.append(TodoName)
+
+        let descDiv = document.createElement("div")
+        descDiv.classList = "task-content-div"
         let TodoDescription = document.createElement("p")
+        descDiv.append(TodoDescription)
+
+        let dateDiv = document.createElement("div")
+        dateDiv.classList = "task-content-div"
         let TodoDate = document.createElement("p")
+        dateDiv.append(TodoDate)
+
+        let priorityDiv = document.createElement("div")
+        priorityDiv.classList = "task-content-div"
         let TodoPriority = document.createElement('p')
+        priorityDiv.append(TodoPriority)
 
 
 
@@ -193,7 +208,7 @@ const todoApp = (() => {
         }
         
 
-        childDiv.append(TodoName, TodoDescription, TodoDate, TodoPriority)
+        childDiv.append(nameDiv, descDiv, dateDiv, priorityDiv)
         contentDiv.append(childDiv)
         
 
@@ -205,13 +220,13 @@ const todoApp = (() => {
   let addTaskButtons = (taskDiv) => {
     let taskButtonDiv = document.createElement("div")
     taskButtonDiv.classList = "task-buttons"
-    let deleteButton = document.createElement("button");
+    let deleteButton = document.createElement("img");
     deleteButton.id = 'delete-button'
-    deleteButton.textContent = 'delete'
+    deleteButton.src = "/src/trash-can.png"
 
-    let editButton = document.createElement("button");
+    let editButton = document.createElement("img");
     editButton.id = 'update-button'
-    editButton.textContent = "Edit"
+    editButton.src = "/src/pencil.png"
 
     for (let i = 0; i < projectList.length; i++) {
         deleteButton.setAttribute('button-id', i)
@@ -243,7 +258,7 @@ const todoApp = (() => {
 
     title.type = 'text'
     title.id = "title"
-    title.placeholder = "new task title"
+    title.placeholder = "New task title"
     title.required = true
 
     description.type = "text"
@@ -322,18 +337,3 @@ let displayLocalItems = () => {
 })();
 
 export default todoApp;
-
-
-  //Removing for now. Not needed/better flow without it.
-//   let newTaskButton = () => {
-//     let button = document.createElement("button")
-//     button.textContent = "Add task"
-//     button.classList = "add-task-button"
-
-//     let form = document.querySelector(".input-container-hidden")
-//     button.addEventListener("click", function() {
-//         form.classList = "input-container"
-//     })
-    
-//     contentDiv.append(button)
-//   };
