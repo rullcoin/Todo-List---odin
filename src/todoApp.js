@@ -222,11 +222,11 @@ const todoApp = (() => {
     taskButtonDiv.classList = "task-buttons"
     let deleteButton = document.createElement("img");
     deleteButton.id = 'delete-button'
-    deleteButton.src = "/src/trash-can.png"
+    deleteButton.src = "/images/trash-can.png"
 
     let editButton = document.createElement("img");
     editButton.id = 'update-button'
-    editButton.src = "/src/pencil.png"
+    editButton.src = "/images/pencil.png"
 
     for (let i = 0; i < projectList.length; i++) {
         deleteButton.setAttribute('button-id', i)
