@@ -28,15 +28,11 @@ const todoApp = (() => {
     let idToDelete = e.target.parentNode.parentNode.getAttribute('div-id')
 
     e.target.parentNode.parentNode.remove()
-    //console.log(projectList[projectID].projectTodoList[idToDelete]);
     projectList[projectID].projectTodoList.splice(idToDelete, 1)
     console.log(projectList[projectID].projectTodoList.length);
 
+    // Needed to refresh current todo's div ID.
     displayContent(projectID)
-
-    // for (let i = 0; i < projectList[id].projectTodoList.length; i++) {
-    //     childDiv.setAttribute('div-id', i)
-    // }
 
     //Refresh local item list
     localStoreItem('list', JSON.stringify(projectList))
@@ -53,11 +49,8 @@ const todoApp = (() => {
     let currentPriority = project.priority
     //Add date and priority as well
     
-    //let parentDiv = e.target.parentNode.parentNode
     let projectDiv = document.getElementById("add-project-container")
 
-    
-    //let newForm = document.createElement("form")
     newForm.classList = "edit-form"
     newForm.id = "edit-form"
 
@@ -84,6 +77,7 @@ const todoApp = (() => {
     date.value = currentDate
 
     priority.id = "edit-select"
+
     let optionLow = document.createElement('option')
     let optionImportant = document.createElement('option')
     optionLow.text = 'Low'
@@ -126,9 +120,6 @@ const todoApp = (() => {
     blockerDiv.classList = "blocker"
     blockerDiv.id = "blocker"
 
-    let editingDiv = document.getElementById("editing-div")
-    let editForm = document.getElementById("edit-form")
-
     div.append(blockerDiv)
 
     blockerDiv.addEventListener('click', function(e) {
@@ -139,18 +130,6 @@ const todoApp = (() => {
         } else {
             e.target.parentNode.removeChild(blockerDiv)
         }
-
-
-        //
-        // if (newForm.classList === "edit-form") {
-        //     console.log("lol");
-        //     //e.target.parentNode.removeChild(editForm)
-        //     //console.log(e.target.removeChild(editForm));
-        // } else {
-        //     e.target.parentNode.removeChild(editForm)
-        //    //e.target.parentNode.parentNode.removeChild(editForm)
-        //     console.log(e.target);
-        // }
     })
   }
 
@@ -180,6 +159,11 @@ const todoApp = (() => {
     //Resets content div, needed so there are no duplicates
     contentDiv.textContent = ""
     
+    let projectsName = document.createElement("h1")
+    projectsName.classList = "projects-title"
+    projectsName.textContent = projectList[id].name
+
+    contentDiv.append(projectsName)
     createForm(id)
     
     //For each project todo, make div etc
@@ -190,11 +174,12 @@ const todoApp = (() => {
         childDiv.setAttribute('div-id', i)
         childDiv.setAttribute('project-id', id)
 
-        let TodoName = document.createElement("h1")
+        let TodoName = document.createElement("h4")
         let TodoDescription = document.createElement("p")
         let TodoDate = document.createElement("p")
         let TodoPriority = document.createElement('p')
-        
+
+
 
         TodoName.textContent = currentProject.projectTodoList[i].title
         TodoDescription.textContent = currentProject.projectTodoList[i].description
@@ -206,21 +191,22 @@ const todoApp = (() => {
         } else {
             TodoPriority.classList = "low-priority"
         }
+        
 
         childDiv.append(TodoName, TodoDescription, TodoDate, TodoPriority)
         contentDiv.append(childDiv)
+        
 
         addTaskButtons(childDiv)
         
     }
-    //newTaskButton()
   };
 
   let addTaskButtons = (taskDiv) => {
     let taskButtonDiv = document.createElement("div")
     taskButtonDiv.classList = "task-buttons"
     let deleteButton = document.createElement("button");
-    deleteButton.id = 'label-button'
+    deleteButton.id = 'delete-button'
     deleteButton.textContent = 'delete'
 
     let editButton = document.createElement("button");
@@ -246,7 +232,6 @@ const todoApp = (() => {
     let formDiv = document.createElement("div")
 
     formDiv.classList.add("input-container")
-    //formDiv.classList.add("input-container-hidden")
     let form = document.createElement("form")
     form.classList.add("form-div")
 
@@ -269,7 +254,7 @@ const todoApp = (() => {
 
     button.type = 'button'
     button.id = 'label-button'
-    button.value = 'submit'
+    button.value = 'Add task'
 
     date.type = "date"
     date.id = 'date'
@@ -303,22 +288,9 @@ const todoApp = (() => {
 
         currentProjectList.push(newTask)
 
-        // Add new project and task to local storage
-
-
-        //localStorage.clear() //remove after tests
-        //localStoreItem(projectList[currentID].name, JSON.stringify(newTask))
-
-        //Retrieves item
-        //let item = retrieveLocalItem(projectList[currentID].name);
-        //console.log(retrieveLocalItem(projectList[currentID].name))
-        
+        // Local item storage
         localStoreItem('list', JSON.stringify(projectList))
-        // console.log(projectList);
        
-        // add the result to project list on refresh
-
-        
         displayContent(currentID)
 
     } else {
@@ -343,7 +315,6 @@ let displayLocalItems = () => {
         addToDiv()
     }
 }
-
 
   return { CreateNewTodo, newProject, projectList, deleteTask, 
     addToDiv, displayContent, createForm, createBlockerDiv, localStoreItem, 

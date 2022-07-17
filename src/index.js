@@ -45,8 +45,5 @@ cancelProjectButton.addEventListener("click", function(e) {
     projectLabel.value = ""
 })
 
-//console.log(localStorage.length);
+//Display current local items
 todoApp.displayLocalItems()
-//localStorage.clear()
-// todoApp.addToDiv()
-// console.log(todoApp.projectList);

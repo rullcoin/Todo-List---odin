@@ -1,17 +1,26 @@
+:root {
+    --background-color: rgb(237, 252, 247);
+}
+
 body {
     padding: 0;
     margin: 0;
     font-family: 'Roboto', sans-serif;
+    background-color: var(--background-color);
+    min-width: 100vh;
 }
 
 header {
-    width: 100%;
-    border: 1px solid gainsboro;
+    border: 1px solid rgb(104, 102, 102);
     display: flex;
     justify-content: start;
     padding-left: 3rem;
-    margin-bottom: 5px;
-    background-color: aliceblue;
+    background-color: rgb(132, 186, 240);
+    color: #FFF;
+}
+
+.title {
+    width: 100vh;
 }
 
 .container {
@@ -22,20 +31,37 @@ header {
 .menu-items {
     display: flex;
     flex-direction: column;
-    border: 1px solid black;
+    border-right: 1px solid rgb(159, 209, 211);
 
-    background-color: rgb(161, 199, 139);
-    padding-left: 3rem;
-    
+    background-color: rgb(241, 255, 255);
+    padding: 0 3rem 0 3rem;
+    border-radius: 15px;
+}
+
+#new-project-button {
+    background-color: rgb(241, 255, 255);
+    border-radius: 25px;
+    border: none;
+    font-size: 2rem;
+}
+
+#new-project-button:hover {
+    background-color: rgb(132, 186, 240);
 }
 
 .projects {
     height: 300px;
     overflow-y: auto;
+    
 }
 
 #project-name {
 cursor: pointer;
+
+}
+
+#project-name:hover {
+    background-color: rgb(202, 255, 255);
 }
 
 #project-name * {
@@ -50,12 +76,50 @@ cursor: pointer;
 .input-container {
     display: flex;
     justify-content: center;
+    padding-bottom: 10px;
+}
+
+.projects-title {
+    text-align: center;
+}
+
+.form-div input{
+    border: 0;
+    /* border-bottom: 1px solid rgb(177, 175, 175); */
+    font-size: 1rem;
+    background-color: var(--background-color);
+    /* color: rgb(255, 255, 255); */
+    font-weight: bold;
+    height: 2rem;
+}
+
+.form-div select {
+    width: 8rem;
+    height: 2rem;
+    margin-right: 10px;
+    background-color: var(--background-color);
+    text-align: center;
+    border: none;
+}
+
+#label-button {
+    border-radius: 10px;
+    border: 3px solid black;
+    font-weight: bold;
+}
+
+.form-div *:hover {
+    background-color: rgb(182, 240, 255);
 }
 
 .content-container {
     width: 100%;
     display: flex;
     justify-content: center;
+}
+
+#date {
+    border: none;
 }
 
 .content {
@@ -86,23 +150,6 @@ cursor: pointer;
     transition: 0.2s ease-in-out;
 }
 
-
-
-/* .project-label {
-    border: 1px solid var(--grey);
-    border-radius: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #FFF;
-    position: fixed;
-    top: 50vh;
-    left: 50vw;
-
-    font-size: 1.1em;
-    padding: 10px;
-} */
-
 .add-project-form button {
     width: 3rem;
     height: 1rem;
@@ -112,12 +159,14 @@ cursor: pointer;
 }
 
 .task-container {
-    border: 1px solid black;
+    border: 1px solid rgb(156, 154, 154);
+    border-radius: 25px;
     padding: 5px;
     display: flex;
-    justify-content: center;
+    justify-content: space-around;
     align-items: center;
     gap: 5rem;
+    margin-bottom: 5px;
 }
 
 .project-heading {
